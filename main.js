@@ -1,17 +1,15 @@
-// Utility function to simulate delay
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Simulated async data fetchers with possible random errors
 async function fetchUserProfile() {
-  await delay(1000);
+  await delay(500);
   if (Math.random() < 0.2) throw new Error("Failed to fetch user profile.");
-  return { id: 1, name: "Jane Doe" };
+  return { id: 1, name: "Sully" };
 }
 
 async function fetchPosts(userId) {
-  await delay(1000);
+  await delay(500);
   if (Math.random() < 0.2) throw new Error("Failed to fetch posts.");
   return [
     { id: 101, title: "Post 1", userId },
@@ -23,12 +21,11 @@ async function fetchComments(postId) {
   await delay(1000);
   if (Math.random() < 0.3) throw new Error(`Failed to fetch comments for post ${postId}.`);
   return [
-    { id: 201, postId, text: "Nice post!" },
-    { id: 202, postId, text: "Very helpful!" },
+    { id: 201, postId, text: "Nice!" },
+    { id: 202, postId, text: "Amazing!" },
   ];
 }
 
-// Sequential Fetching
 async function fetchSequential() {
   console.log("Starting sequential fetch...");
   try {
@@ -51,7 +48,6 @@ async function fetchSequential() {
   }
 }
 
-// Parallel Fetching
 async function fetchParallel() {
   console.log("\nStarting parallel fetch...");
   try {
@@ -68,7 +64,6 @@ async function fetchParallel() {
   }
 }
 
-// Combined Flow
 async function getUserContent() {
   console.log("\nRunning getUserContent() flow...");
   try {
@@ -89,18 +84,17 @@ async function getUserContent() {
       }
     }
 
-    console.log("\n✅ Final Combined Data:");
+    console.log("\n Final Combined Data:");
     console.log({
       user,
       posts,
       comments: allComments,
     });
   } catch (err) {
-    console.error("❌ getUserContent error:", err.message);
+    console.error("getUserContent error:", err.message);
   }
 }
 
-// Run all flows for testing
 fetchSequential();
 fetchParallel();
 getUserContent();
